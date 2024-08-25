@@ -31,3 +31,31 @@ document.addEventListener('DOMContentLoaded', () => {
         checkResult();
     }
 
+    function checkResult() {
+        let roundWon = false;
+        for (let i = 0; i < winningConditions.length; i++) {
+            const [a, b, c] = winningConditions[i];
+            if (gameState[a] && gameState[a] === gameState[b] && gameState[a] === gameState[c]) {
+                roundWon = true;
+                break;
+            }
+        }
+
+        if (roundWon) {
+            statusDisplay.textContent = winningMessage();
+            gameActive = false;
+            return;
+        }
+
+        const roundDraw = !gameState.includes('');
+        if (roundDraw) {
+            statusDisplay.textContent = drawMessage();
+            gameActive = false;
+            return;
+        }
+
+        currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+        statusDisplay.textContent = currentPlayerTurn();
+    }
+
+
