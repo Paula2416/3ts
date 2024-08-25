@@ -58,4 +58,25 @@ document.addEventListener('DOMContentLoaded', () => {
         statusDisplay.textContent = currentPlayerTurn();
     }
 
+    function resetGame() {
+        gameActive = true;
+        currentPlayer = 'X';
+        gameState = ['', '', '', '', '', '', '', '', ''];
+        statusDisplay.textContent = currentPlayerTurn();
+        Array.from(board.children).forEach(cell => cell.textContent = '');
+    }
+    function createBoard() {
+        board.innerHTML = '';
+        for (let i = 0; i < 9; i++) {
+            const cell = document.createElement('div');
+            cell.addEventListener('click', handleCellClick);
+            board.appendChild(cell);
+        }
+    }
+    resetButton.addEventListener('click', resetGame);
+    createBoard();
+});
+
+
+
 
