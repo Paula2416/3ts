@@ -15,4 +15,19 @@ document.addEventListener('DOMContentLoaded', () => {
         [0, 4, 8],
         [2, 4, 6]
     ];
-}
+    const winningMessage = () => `Player ${currentPlayer} has won!`;
+    const drawMessage = () => `It's a draw!`;
+    const currentPlayerTurn = () => `Player ${currentPlayer}'s turn`;
+    function handleCellClick(clickedCellEvent) {
+        const clickedCell = clickedCellEvent.target;
+        const clickedCellIndex = Array.from(board.children).indexOf(clickedCell);
+
+        if (gameState[clickedCellIndex] !== '' || !gameActive) {
+            return;
+        }
+
+        gameState[clickedCellIndex] = currentPlayer;
+        clickedCell.textContent = currentPlayer;
+        checkResult();
+    }
+
